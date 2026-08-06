@@ -54,11 +54,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body suppressHydrationWarning>
         {children}
-<<<<<<< HEAD
         <Analytics />
-=======
         <SpeedInsights />
->>>>>>> d848e35 (N)
       </body>
     </html>
   );
