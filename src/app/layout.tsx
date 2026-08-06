@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -37,10 +38,27 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: `try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("anim")}}catch(e){}`,
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "Dream Dental",
+              "applicationCategory": "BusinessApplication",
+              "operatingSystem": "Web",
+              "description": "All-in-one dental clinic management — clinical, business and financial in one system.",
+            })
+          }}
+        />
       </head>
       <body suppressHydrationWarning>
         {children}
+<<<<<<< HEAD
         <Analytics />
+=======
+        <SpeedInsights />
+>>>>>>> d848e35 (N)
       </body>
     </html>
   );
