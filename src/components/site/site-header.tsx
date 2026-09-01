@@ -1,18 +1,17 @@
 import Image from "next/image";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 type SiteHeaderProps = {
   menuOpen: boolean;
   onToggleMenu: () => void;
+  onRequestDemo?: () => void;
 };
 
-const navLinkClassName =
-  "h-9 px-3 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground";
-
-export function SiteHeader({ menuOpen, onToggleMenu }: SiteHeaderProps) {
+export function SiteHeader({ menuOpen, onToggleMenu, onRequestDemo }: SiteHeaderProps) {
   return (
     <>
+      {/* Subtle top progress indicator */}
       <div
         data-progress=""
         style={{
@@ -20,150 +19,106 @@ export function SiteHeader({ menuOpen, onToggleMenu }: SiteHeaderProps) {
           top: 0,
           left: 0,
           height: "2px",
-          // driven by scaleX, not width — a transform composites, a width
-          // change relayouts on every scroll frame
           width: "100%",
           transform: "scaleX(0)",
           transformOrigin: "left center",
           willChange: "transform",
-          background: "var(--brand)",
+          background: "#2F6F6A",
           zIndex: 100,
         }}
       />
 
       <header
         data-header=""
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 60,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "clamp(16px,2vw,32px)",
-          padding: "12px clamp(18px,4vw,40px)",
-          backdropFilter: "blur(14px)",
-          WebkitBackdropFilter: "blur(14px)",
-          // background / border / shadow live in globals.css so the scrolled
-          // state is a single attribute flip instead of three style writes
-          // per scroll frame
-        }}
+        className="sticky top-0 z-40 flex items-center justify-between h-[72px] px-4 sm:px-8 lg:px-12 bg-[#F6F4EF]/85 backdrop-blur-md border-b border-[#18252B]/8 transition-all duration-300"
       >
-        <a href="/" style={{ display: "block" }}>
+        {/* Brand Wordmark */}
+        <Link href="/" className="flex items-center gap-2 select-none group">
           <Image
-            src="/dreamdental-wordmark-dark.svg"
+            src="/dreamdental-wordmark.svg"
             alt="dreamdental"
             height={144}
             width={638}
-            style={{ height: "26px", width: "auto", display: "block" }}
+            className="h-[24px] sm:h-[26px] w-auto block transition-opacity group-hover:opacity-85"
             priority
           />
-        </a>
+        </Link>
 
+        {/* Desktop Navigation */}
         <nav
           data-desktop-nav=""
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "clamp(14px,2vw,30px)",
-          }}
+          className="hidden md:flex items-center gap-1 lg:gap-2"
         >
           <a
-            href="/#modules"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              navLinkClassName,
-            )}
+            href="/#workflow"
+            className="px-3.5 py-2 text-sm font-medium text-[#5F696B] hover:text-[#18252B] hover:bg-[#ECE9E2]/60 rounded-lg transition-colors"
           >
-            Modules
+            Product
           </a>
           <a
-            href="/#odontogram"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              navLinkClassName,
-            )}
+            href="/#chairside"
+            className="px-3.5 py-2 text-sm font-medium text-[#5F696B] hover:text-[#18252B] hover:bg-[#ECE9E2]/60 rounded-lg transition-colors"
           >
-            Clinical
-          </a>
-          <a
-            href="/#business"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              navLinkClassName,
-            )}
-          >
-            Business
+            For Clinics
           </a>
           <a
             href="/#security"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              navLinkClassName,
-            )}
+            className="px-3.5 py-2 text-sm font-medium text-[#5F696B] hover:text-[#18252B] hover:bg-[#ECE9E2]/60 rounded-lg transition-colors"
           >
             Security
           </a>
           <a
+            href="/#system"
+            className="px-3.5 py-2 text-sm font-medium text-[#5F696B] hover:text-[#18252B] hover:bg-[#ECE9E2]/60 rounded-lg transition-colors"
+          >
+            About
+          </a>
+          <Link
             href="/contact"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              navLinkClassName,
-            )}
+            className="px-3.5 py-2 text-sm font-medium text-[#5F696B] hover:text-[#18252B] hover:bg-[#ECE9E2]/60 rounded-lg transition-colors"
           >
             Contact
-          </a>
+          </Link>
         </nav>
 
+        {/* Action Button & Mobile Burger */}
+        <div className="flex items-center gap-3">
+          <Link
+            href="/contact"
+            className="hidden sm:inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-[#2F6F6A] hover:bg-[#214F4B] text-white text-sm font-medium transition-colors shadow-sm"
+          >
+            <span>Request a Demo</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
 
-        <button
-          data-burger=""
-          type="button"
-          aria-label="Menu"
-          aria-expanded={menuOpen}
-          onClick={onToggleMenu}
-          className="bg-transparent hover:bg-secondary"
-          style={{
-            width: "40px",
-            height: "40px",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            gap: "5px",
-            border: "1px solid var(--border)",
-            borderRadius: "var(--radius-md)",
-            cursor: "pointer",
-            padding: 0,
-            transition: "background-color .15s ease",
-          }}
-        >
-          <span
-            data-burger-top=""
-            style={{
-              display: "block",
-              width: "18px",
-              height: "1.5px",
-              background: "#E8EDEE",
-              borderRadius: "2px",
-              transition: "transform .28s ease",
-              transform: menuOpen ? "translateY(3.25px) rotate(45deg)" : "none",
-            }}
-          />
-          <span
-            data-burger-bot=""
-            style={{
-              display: "block",
-              width: "18px",
-              height: "1.5px",
-              background: "#E8EDEE",
-              borderRadius: "2px",
-              transition: "transform .28s ease",
-              transform: menuOpen
-                ? "translateY(-3.25px) rotate(-45deg)"
-                : "none",
-            }}
-          />
-        </button>
+          {/* Mobile menu trigger */}
+          <button
+            data-burger=""
+            type="button"
+            aria-label="Menu"
+            aria-expanded={menuOpen}
+            onClick={onToggleMenu}
+            className="flex md:hidden w-10 h-10 items-center justify-center rounded-lg border border-[#18252B]/12 bg-white/60 hover:bg-[#ECE9E2] text-[#18252B] transition-colors"
+          >
+            <div className="flex flex-col gap-1.5 items-center justify-center w-5">
+              <span
+                className={`block h-0.5 w-4 bg-[#18252B] rounded-full transition-transform duration-200 ${
+                  menuOpen ? "translate-y-2 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-4 bg-[#18252B] rounded-full transition-opacity duration-200 ${
+                  menuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-4 bg-[#18252B] rounded-full transition-transform duration-200 ${
+                  menuOpen ? "-translate-y-2 -rotate-45" : ""
+                }`}
+              />
+            </div>
+          </button>
+        </div>
       </header>
     </>
   );

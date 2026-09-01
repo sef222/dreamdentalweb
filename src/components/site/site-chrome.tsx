@@ -20,12 +20,6 @@ export function SiteChrome() {
   }, [menuOpen]);
 
   // The timeline is built once, at mount, while the drawer is still hidden.
-  // That is the whole fix for "text appears before the animation ends": a
-  // paused fromTo renders its from-state immediately, so by the time the
-  // drawer is ever shown every line is already masked, every rule collapsed
-  // and both curtains retracted. The old build passed immediateRender:false,
-  // so the first frame after opening was fully-formed text that then jumped
-  // back and re-animated.
   useGSAP(
     () => {
       const drawer = drawerRef.current;
@@ -59,7 +53,6 @@ export function SiteChrome() {
               drawer.style.pointerEvents = "none";
             },
             onComplete: () => {
-              // release the compositor hints once the curtains have landed
               gsap.set(q("[data-drawer-accent],[data-drawer-bg]"), {
                 willChange: "auto",
               });
@@ -67,82 +60,61 @@ export function SiteChrome() {
           });
 
           tl
-            // Curtains sweep down, accent leading, background trailing.
             .fromTo(
               q("[data-drawer-accent]"),
               { clipPath: "inset(0 0 100% 0)" },
-              { clipPath: "inset(0 0 0% 0)", duration: 0.5 },
+              { clipPath: "inset(0 0 0% 0)", duration: 0.4 },
               0,
             )
             .fromTo(
               q("[data-drawer-bg]"),
               { clipPath: "inset(0 0 100% 0)" },
-              { clipPath: "inset(0 0 0% 0)", duration: 0.62 },
-              0.1,
+              { clipPath: "inset(0 0 0% 0)", duration: 0.5 },
+              0.08,
             )
             .fromTo(
               q("[data-drawer-deco]"),
               { opacity: 0 },
-              { opacity: 1, duration: 0.5, ease: "power2.out" },
-              0.5,
+              { opacity: 1, duration: 0.4, ease: "power2.out" },
+              0.4,
             )
             .fromTo(
               q("[data-drawer-top]"),
-              { y: -20, opacity: 0 },
-              { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" },
-              0.62,
+              { y: -16, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" },
+              0.45,
             )
             .fromTo(
               q("[data-drawer-eyebrow]"),
               { opacity: 0, x: -10 },
-              { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" },
-              0.66,
+              { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" },
+              0.5,
             )
-            // Lines start only once the background curtain has fully landed
-            // (0.1 + 0.62 = 0.72), so nothing is ever legible over a moving
-            // curtain. They rise out of their masks, not out of nowhere.
             .fromTo(
               q("[data-drawer-line]"),
-              { yPercent: 110 },
+              { yPercent: 100, opacity: 0 },
               {
                 yPercent: 0,
-                duration: 0.78,
-                stagger: 0.075,
+                opacity: 1,
+                duration: 0.55,
+                stagger: 0.05,
                 ease: "expo.out",
               },
-              0.72,
+              0.55,
             )
             .fromTo(
-              q("[data-drawer-rule]"),
-              { scaleX: 0 },
-              {
-                scaleX: 1,
-                duration: 0.6,
-                stagger: 0.075,
-                ease: "power3.out",
-              },
-              0.8,
-            )
-            .fromTo(
-              q("[data-drawer-foot] > *"),
-              { y: 22, opacity: 0 },
+              q("[data-drawer-foot]"),
+              { y: 16, opacity: 0 },
               {
                 y: 0,
                 opacity: 1,
-                duration: 0.5,
-                stagger: 0.07,
+                duration: 0.4,
                 ease: "power3.out",
               },
-              0.95,
+              0.75,
             );
 
-          // A paused timeline does not render its from-states until something
-          // first ticks it, which would put one frame of finished-looking
-          // content on screen at the moment the drawer becomes visible.
-          // pause(0) seeks and renders synchronously, here at mount, so the
-          // masked/collapsed state is already committed long before opening.
           tl.pause(0);
-
           timelineRef.current = tl;
 
           return () => {
@@ -178,9 +150,6 @@ export function SiteChrome() {
       );
       tl.timeScale(1).play();
     } else {
-      // Closing runs the same choreography backwards but quicker — dwelling on
-      // the exit is what makes a menu feel sluggish. onReverseComplete hides
-      // the drawer; no guard timeout can strand it mid-animation any more.
       tl.timeScale(1.5).reverse();
     }
   }, []);
@@ -189,7 +158,6 @@ export function SiteChrome() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" && menuOpenRef.current) setMenu(false);
     };
-    // close the drawer if the viewport grows past the mobile breakpoint
     const onResize = () => {
       if (window.innerWidth > 900 && menuOpenRef.current) setMenu(false);
     };
@@ -204,8 +172,14 @@ export function SiteChrome() {
 
   return (
     <>
-      <SiteHeader menuOpen={menuOpen} onToggleMenu={() => setMenu(!menuOpen)} />
-      <MobileDrawer rootRef={drawerRef} onClose={() => setMenu(false)} />
+      <SiteHeader
+        menuOpen={menuOpen}
+        onToggleMenu={() => setMenu(!menuOpen)}
+      />
+      <MobileDrawer
+        rootRef={drawerRef}
+        onClose={() => setMenu(false)}
+      />
     </>
   );
 }

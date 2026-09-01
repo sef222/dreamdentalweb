@@ -7,26 +7,43 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-poppins);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-poppins);
-  --color-brand: var(--brand);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-heading: var(--font-serif);
+  
+  --color-brand: var(--primary);
   --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+
+  --color-ink: var(--ink);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-muted: var(--ink-muted);
+
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-clinical-blue: var(--clinical-blue);
+  --color-clinical-blue-light: var(--clinical-blue-light);
+
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -34,34 +51,48 @@
   --radius-2xl: calc(var(--radius) * 1.8);
 }
 
-/* Dark-only design. Tokens copied 1:1 from the Claude Design source. */
-:root,
-.dark {
-  --brand: #da6c70;
+:root {
+  /* Warm Ivory Design System */
+  --background: #F6F4EF;
+  --surface: #FFFFFF;
+  --surface-muted: #ECE9E2;
 
-  --background: #0a1416;
-  --foreground: #e8edee;
-  --card: #101b1f;
-  --card-foreground: #e8edee;
-  --popover: #101b1f;
-  --popover-foreground: #e8edee;
-  --primary: var(--brand);
-  --primary-foreground: #fff;
-  --secondary: oklch(1 0 0 / 6%);
-  --secondary-foreground: #e8edee;
-  --muted: oklch(1 0 0 / 5%);
-  --muted-foreground: oklch(0.708 0.014 205);
-  /* shadcn's --accent drives ghost/hover surfaces — kept as the subtle
-     overlay the design uses for hover, NOT the brand colour. */
-  --accent: oklch(1 0 0 / 6%);
-  --accent-foreground: #e8edee;
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: var(--brand);
+  --ink: #18252B;
+  --ink-secondary: #5F696B;
+  --ink-muted: #899193;
+
+  --primary: #2F6F6A;
+  --primary-dark: #214F4B;
+  --primary-light: #DCEBE7;
+  --primary-foreground: #FFFFFF;
+
+  --accent: #D9795B;
+  --accent-light: #F3DDD5;
+  --accent-foreground: #FFFFFF;
+
+  --clinical-blue: #54799A;
+  --clinical-blue-light: #DDE8F0;
+
+  --foreground: #18252B;
+  --card: #FFFFFF;
+  --card-foreground: #18252B;
+  --popover: #FFFFFF;
+  --popover-foreground: #18252B;
+  
+  --secondary: #ECE9E2;
+  --secondary-foreground: #18252B;
+  --muted: #ECE9E2;
+  --muted-foreground: #5F696B;
+  
+  --destructive: #D94841;
+  --border: rgba(24, 37, 43, 0.10);
+  --input: rgba(24, 37, 43, 0.12);
+  --ring: #2F6F6A;
+  
   --radius: 0.625rem;
   --radius-md: calc(var(--radius) - 2px);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
 }
 
 @layer base {
@@ -71,68 +102,51 @@
   html {
     scroll-behavior: smooth;
     @apply font-sans;
+    background-color: #F6F4EF;
+    color: #18252B;
   }
   body {
     margin: 0;
-    background: #0a1416;
-    color: #e8edee;
+    background: #F6F4EF;
+    color: #18252B;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
   }
 }
 
-/* ---------------------------------------------------------------------------
-   Verbatim from the design source. The GSAP selectors and these media queries
-   both key off the same [data-*] attributes — do not rename them.
-   --------------------------------------------------------------------------- */
-/* Layered (not left bare like the rest of this block) so Tailwind's
-   utility-layer text-color classes on <a> elements (nav links, CTA
-   buttons rendered as <a> via shadcn's `render` prop, footer links) can
-   win over this fallback — unlayered CSS otherwise beats layered
-   utilities regardless of specificity. */
 @layer base {
   a {
-    color: var(--brand);
+    color: var(--primary);
     text-decoration: none;
   }
   a:hover {
-    color: #e79094;
+    color: var(--primary-dark);
   }
 }
+
 ::selection {
-  background: var(--brand);
+  background: var(--primary);
   color: #fff;
 }
+
 :focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 40%, transparent);
   border-radius: var(--radius-md);
 }
+
 section[id] {
   scroll-margin-top: 86px;
 }
-/* Set by the inline script in layout.tsx, before first paint, and only when
-   scripting is on and motion is welcome. Without it the SSR hero paints at
-   full opacity and then snaps to hidden when the intro timeline initialises.
-   Scoped to the hero: everything else is below the fold when this matters. */
-.anim [data-hero] [data-r],
-.anim [data-hero] [data-tile] {
+
+.anim [data-hero] [data-r] {
   opacity: 0;
 }
 
-/* GSAP owns opacity/transform on the drawer footer links, but they carry
-   shadcn's `transition-all`, so every value GSAP wrote was re-interpolated by
-   a 150ms CSS transition — the reveal smeared and arrived late. Narrow the
-   transition to the colour properties the hover state actually needs. */
-[data-drawer-foot] > a {
-  transition-property: background-color, border-color, color, box-shadow;
-}
-
-/* Header rest / scrolled states. ScrollTrigger flips [data-scrolled] once per
-   crossing; the transition is the browser's, not a per-frame JS write. */
+/* Header rest / scrolled states */
 [data-header] {
-  background: rgba(10, 20, 22, 0.72);
+  background: rgba(246, 244, 239, 0.82);
   border-bottom: 1px solid var(--border);
   transition:
     background 0.3s ease,
@@ -140,39 +154,33 @@ section[id] {
     border-color 0.3s ease;
 }
 [data-header][data-scrolled] {
-  background: rgba(10, 20, 22, 0.88);
-  border-bottom-color: oklch(1 0 0 / 16%);
-  box-shadow: 0 12px 30px -20px rgba(0, 0, 0, 0.9);
+  background: rgba(246, 244, 239, 0.95);
+  border-bottom-color: rgba(24, 37, 43, 0.12);
+  box-shadow: 0 10px 30px -15px rgba(24, 37, 43, 0.08);
 }
+
 [data-burger] {
   display: none;
 }
-[data-scroll-x] {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(232, 237, 238, 0.24) transparent;
+
+/* Screenshot presentation frame class */
+.screenshot-frame {
+  border-radius: 18px;
+  border: 1px solid rgba(24, 37, 43, 0.10);
+  box-shadow: 0 24px 60px rgba(24, 37, 43, 0.08), 0 4px 16px rgba(24, 37, 43, 0.04);
+  background: #ffffff;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
-[data-scroll-x]::-webkit-scrollbar {
-  height: 5px;
+
+.screenshot-frame-dark {
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 28px 70px rgba(10, 24, 22, 0.45);
+  background: #18252B;
+  overflow: hidden;
 }
-[data-scroll-x]::-webkit-scrollbar-track {
-  background: transparent;
-}
-[data-scroll-x]::-webkit-scrollbar-thumb {
-  background: rgba(232, 237, 238, 0.22);
-  border-radius: 99px;
-}
-@media (max-width: 1180px) {
-  [data-logos] {
-    gap: 24px !important;
-  }
-  [data-logos] > div {
-    margin-left: 0 !important;
-    gap: 16px 28px !important;
-  }
-  [data-desktop-nav] a {
-    font-size: 14px !important;
-  }
-}
+
 @media (max-width: 900px) {
   [data-desktop-nav] {
     display: none !important;
@@ -180,114 +188,8 @@ section[id] {
   [data-burger] {
     display: flex !important;
   }
-  h1 {
-    font-size: clamp(34px, 9vw, 46px) !important;
-    line-height: 1.05 !important;
-  }
-  h2 {
-    font-size: clamp(26px, 6.6vw, 34px) !important;
-    line-height: 1.1 !important;
-  }
-  [data-words] {
-    font-size: clamp(21px, 5.2vw, 28px) !important;
-    line-height: 1.36 !important;
-  }
-  blockquote {
-    font-size: clamp(19px, 4.8vw, 24px) !important;
-    line-height: 1.45 !important;
-  }
-  [data-hero] > div {
-    gap: 32px !important;
-  }
-  [data-logos] {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 18px !important;
-  }
-  [data-logos] > div {
-    margin-left: 0 !important;
-    gap: 18px 26px !important;
-  }
-  [data-cta-row] {
-    width: 100% !important;
-    flex-direction: column !important;
-  }
-  [data-cta-row] > a {
-    display: flex !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    height: 44px !important;
-  }
-  [data-stat-row] {
-    flex-wrap: wrap !important;
-    gap: 14px 22px !important;
-  }
-  [data-stat-row] > div[style*="width:1px"] {
-    display: none !important;
-  }
-  [data-payroll-foot] {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 8px !important;
-  }
-  [data-foot-bottom] {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 8px !important;
-  }
-  [data-foot-links] a {
-    padding: 7px 0 !important;
-  }
-  [data-sec-grid] {
-    gap: 36px !important;
-  }
 }
-@media (max-width: 520px) {
-  [data-hero-bento] {
-    grid-template-columns: 1fr !important;
-  }
-  [data-hero-bento] > [data-span] {
-    grid-column: 1/-1 !important;
-  }
-  [data-hero-teeth] span {
-    display: none !important;
-  }
-  [data-hero-teeth] > div > div {
-    height: 38px !important;
-  }
-  [data-payroll-head] {
-    display: none !important;
-  }
-  [data-payroll-row] {
-    grid-template-columns: 1fr !important;
-    row-gap: 8px !important;
-  }
-  [data-payroll-row] > span {
-    display: flex !important;
-    justify-content: space-between !important;
-    text-align: right !important;
-    font-size: 12px !important;
-  }
-  [data-payroll-row] > span::before {
-    content: attr(data-label);
-    color: var(--muted-foreground);
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    font-size: 10px;
-    text-transform: uppercase;
-  }
-  [data-quad] {
-    grid-template-columns: 1fr 1fr !important;
-  }
-}
-@media (max-width: 400px) {
-  [data-stat-row] {
-    gap: 12px 16px !important;
-  }
-  [data-quad] {
-    grid-template-columns: 1fr !important;
-  }
-}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

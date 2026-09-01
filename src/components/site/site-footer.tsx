@@ -1,17 +1,24 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const productLinks = [
-  { href: "/#modules", label: "Modules" },
-  { href: "/#odontogram", label: "Odontogram" },
-  { href: "/#business", label: "Payroll" },
-  { href: "/#security", label: "Security" },
+  { href: "/#workflow", label: "Patient Workflow" },
+  { href: "/#chairside", label: "Dental Chart" },
+  { href: "/#imaging", label: "Clinical Imaging" },
+  { href: "/#operations", label: "Lab Orders & Operations" },
+  { href: "/#financial", label: "Financial Management" },
+];
+
+const platformLinks = [
+  { href: "/#system", label: "Complete Architecture" },
+  { href: "/#security", label: "Security & Governance" },
+  { href: "/#problem", label: "The Connected Clinic" },
 ];
 
 const companyLinks = [
-  { href: "/contact", label: "Contact" },
+  { href: "/contact", label: "Contact Us" },
+  { href: "/contact", label: "Request a Demo" },
 ];
-
-
 
 function FootLinkGroup({
   heading,
@@ -21,88 +28,56 @@ function FootLinkGroup({
   links: { href: string; label: string }[];
 }) {
   return (
-    <div data-foot-links="" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-      <span style={{ fontSize: "11px", letterSpacing: ".1em", color: "var(--muted-foreground)" }}>
+    <div className="flex flex-col gap-3">
+      <span className="text-xs font-semibold tracking-wider text-[#2F6F6A] uppercase font-mono">
         {heading}
       </span>
-      {links.map((link, i) => (
-        <a
-          key={`${link.href}-${link.label}-${i}`}
-          href={link.href}
-          className="text-muted-foreground transition-colors duration-200 hover:text-[#E8EDEE]"
-          style={{ fontSize: "14px" }}
-        >
-          {link.label}
-        </a>
-      ))}
+      <div className="flex flex-col gap-2.5">
+        {links.map((link, i) => (
+          <a
+            key={`${link.href}-${link.label}-${i}`}
+            href={link.href}
+            className="text-sm text-[#5F696B] hover:text-[#18252B] transition-colors duration-150"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
 
 export function SiteFooter() {
   return (
-    <footer
-      style={{
-        position: "relative",
-        borderTop: "1px solid var(--border)",
-        background: "#0A1416",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(36px,5vw,52px) clamp(18px,4vw,40px) 36px",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(min(180px,100%),1fr))",
-          gap: "40px",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-          <Image
-            src="/dreamdental-wordmark-dark.svg"
-            alt="dreamdental"
-            height={144}
-            width={638}
-            style={{ height: "24px", width: "auto", display: "block" }}
-          />
-          <span
-            style={{
-              fontSize: "14px",
-              lineHeight: 1.6,
-              color: "var(--muted-foreground)",
-              maxWidth: "260px",
-            }}
-          >
-            All-in-one dental clinic management — clinical, business and
-            financial in one system.
-          </span>
+    <footer className="relative border-t border-[#18252B]/10 bg-[#F6F4EF]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-16 sm:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
+          <div className="lg:col-span-2 flex flex-col gap-4">
+            <Link href="/" className="inline-block">
+              <Image
+                src="/dreamdental-wordmark.svg"
+                alt="dreamdental"
+                height={144}
+                width={638}
+                className="h-[24px] w-auto block"
+              />
+            </Link>
+            <p className="text-sm text-[#5F696B] leading-relaxed max-w-sm">
+              All-in-one dental clinic management software bringing patient profiles, operatory schedules, chairside charting, radiographic imaging, and business financials into one workspace.
+            </p>
+          </div>
+
+          <FootLinkGroup heading="CLINICAL MODULES" links={productLinks} />
+          <FootLinkGroup heading="ARCHITECTURE" links={platformLinks} />
+          <FootLinkGroup heading="COMPANY" links={companyLinks} />
         </div>
 
-        <FootLinkGroup heading="PRODUCT" links={productLinks} />
-        <FootLinkGroup heading="COMPANY" links={companyLinks} />
-
-      </div>
-
-      <div
-        data-foot-bottom=""
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "20px clamp(18px,4vw,40px) 36px",
-          borderTop: "1px solid var(--border)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <span style={{ fontSize: "12px", color: "var(--muted-foreground)" }}>
-          © 2026 Dream Dental. All rights reserved.
-        </span>
-        <span style={{ fontSize: "12px", color: "var(--muted-foreground)" }}>
-          Cairo, Egypt
-        </span>
+        <div className="mt-16 pt-8 border-t border-[#18252B]/8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#899193]">
+          <span>© 2026 Dream Dental. All rights reserved.</span>
+          <span>Purpose-built dental healthcare technology</span>
+        </div>
       </div>
     </footer>
   );
 }
+

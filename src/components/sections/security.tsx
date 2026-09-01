@@ -1,122 +1,77 @@
-import { Card } from "@/components/ui/card";
+﻿export function Security() {
+  const securityPoints = [
+    {
+      title: "Patient Records Governance",
+      description:
+        "Medical histories, charting logs, and radiographic scans are stored in structured, tamper-evident records compliant with healthcare privacy regulations.",
+    },
+    {
+      title: "Granular Access Management",
+      description:
+        "Define exact permission tiers for primary dentists, associates, dental assistants, receptionists, and accountants to safeguard sensitive clinic finances.",
+    },
+    {
+      title: "Immutable Activity Tracking",
+      description:
+        "Every change to a dental chart, appointment status, or payment record generates an auditable timestamped event log.",
+    },
+    {
+      title: "Structured Clinic Backups",
+      description:
+        "Automated continuous cloud backups and cryptographic data isolation protect your clinic against local hardware failures or data corruption.",
+    },
+  ];
 
-const items = [
-  {
-    title: "Roles & permissions",
-    description:
-      "Owner, dentist, assistant, reception and accountant presets you can edit.",
-  },
-  {
-    title: "Secure authentication",
-    description: "Encrypted sessions, optional 2FA, and device-level sign-out.",
-  },
-  {
-    title: "Responsive interface",
-    description:
-      "Same clinic, same data — front desk monitor or tablet chairside.",
-  },
-  {
-    title: "Fast search & filtering",
-    description: "Find a patient, invoice or material in a keystroke.",
-  },
-];
-
-export function Security() {
   return (
     <section
       id="security"
-      style={{
-        position: "relative",
-        borderTop: "1px solid var(--border)",
-        background: "#0C171A",
-      }}
+      className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-8 lg:px-12 max-w-6xl mx-auto border-t border-[#18252B]/8"
     >
-      <div
-        data-sec-grid=""
-        style={{
-          maxWidth: "1360px",
-          margin: "0 auto",
-          padding: "clamp(60px,8vw,100px) clamp(18px,4vw,40px)",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit,minmax(min(400px,100%),1fr))",
-          gap: "56px",
-          alignItems: "center",
-        }}
-      >
-        <div>
-          <span
-            data-r=""
-            style={{
-              display: "block",
-              fontSize: "11px",
-              letterSpacing: ".16em",
-              color: "var(--brand)",
-              marginBottom: "14px",
-            }}
-          >
-            SYSTEM
-          </span>
-          <h2
-            data-r=""
-            style={{
-              margin: 0,
-              fontSize: "clamp(30px,3.1vw,40px)",
-              lineHeight: 1.08,
-              letterSpacing: "-.035em",
-              fontWeight: 700,
-              color: "#E8EDEE",
-              textWrap: "balance",
-            }}
-          >
-            Everyone sees exactly what they should.
-          </h2>
-          <p
-            data-r=""
-            style={{
-              margin: "20px 0 0",
-              maxWidth: "460px",
-              fontSize: "16px",
-              lineHeight: 1.7,
-              color: "var(--muted-foreground)",
-            }}
-          >
-            Role-based permissions down to the module: receptionists book,
-            dentists chart, accountants invoice, owners see everything.
-            Secure authentication, full audit history, and search that
-            returns in milliseconds.
-          </p>
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(min(230px,100%),1fr))",
-            gap: "14px",
-          }}
+      <div className="max-w-3xl mb-16 sm:mb-20">
+        <span
+          data-r=""
+          className="text-xs font-semibold tracking-widest text-[#5F696B] uppercase block mb-3 font-mono"
         >
-          {items.map((item) => (
-            <Card
-              key={item.title}
-              data-tile=""
-              className="gap-[8px] border border-border py-5 ring-0 transition-colors duration-[250ms] hover:border-[color-mix(in_oklab,var(--ring)_45%,var(--border))] hover:bg-muted"
-            >
-              <div className="flex flex-col gap-[8px] px-5">
-                <span style={{ fontSize: "14px", fontWeight: 700, color: "#E8EDEE" }}>
-                  {item.title}
-                </span>
-                <span
-                  style={{
-                    fontSize: "14px",
-                    lineHeight: 1.6,
-                    color: "var(--muted-foreground)",
-                  }}
-                >
-                  {item.description}
-                </span>
-              </div>
-            </Card>
-          ))}
-        </div>
+          DATA INTEGRITY & COMPLIANCE
+        </span>
+        <h2
+          data-r=""
+          className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#18252B] leading-[1.12] mb-6"
+        >
+          Your clinic&apos;s information,
+          <br />
+          <span className="font-serif italic font-normal text-[#2F6F6A]">
+            organised and protected.
+          </span>
+        </h2>
+        <p
+          data-r=""
+          className="text-lg sm:text-xl text-[#5F696B] leading-relaxed"
+        >
+          Healthcare technology demands absolute reliability. Dream Dental is built with patient data confidentiality, structured schema design, and enterprise-grade resilience.
+        </p>
+      </div>
+
+      <div
+        data-r=""
+        className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
+      >
+        {securityPoints.map((point, index) => (
+          <div
+            key={index}
+            className="p-6 sm:p-8 rounded-2xl bg-white border border-[#18252B]/8 shadow-sm"
+          >
+            <span className="text-xs font-mono font-semibold text-[#2F6F6A] block mb-3">
+              0{index + 1}
+            </span>
+            <h3 className="text-xl font-semibold text-[#18252B] mb-3">
+              {point.title}
+            </h3>
+            <p className="text-sm text-[#5F696B] leading-relaxed">
+              {point.description}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );

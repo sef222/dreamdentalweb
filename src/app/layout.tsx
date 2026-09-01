@@ -1,39 +1,66 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Instrument_Serif, Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
+const manrope = Manrope({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Dream Dental — The clinic operating system",
+  title: "Dream Dental — Clinic Management Software",
   description:
-    "Dream Dental keeps the front desk, the surgery and the back office on the same page — appointments, odontogram, treatment plans, billing, payroll and inventory in one place.",
+    "Dream Dental brings patients, appointments, treatments, imaging and finances into one connected workspace. Purpose-built for modern dental practices.",
+  keywords: [
+    "dental software",
+    "clinic management",
+    "dental EHR",
+    "dental charting",
+    "odontogram",
+    "x-ray viewer",
+    "dental clinic OS",
+  ],
+  openGraph: {
+    title: "Dream Dental — Clinic Management Software",
+    description:
+      "Everything your clinic does. One place to run it. Purpose-built dental clinic operating system.",
+    type: "website",
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico?v=2" },
+      { url: "/favicon.png?v=2", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png?v=2" },
+    ],
+  },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // suppressHydrationWarning: the inline script below adds `anim` to this
-    // element before React hydrates, so the client className legitimately
-    // differs from the server's. Scoped to <html>; children still diff.
     <html
       lang="en"
-      className={`${poppins.variable} antialiased`}
+      className={`${instrumentSerif.variable} ${manrope.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>
+        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+        <link rel="icon" href="/favicon.png?v=2" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-icon.png?v=2" />
         <script
-          // Runs before first paint. Marks the document as animating so the
-          // hero can start hidden — but only when scripting is live and the
-          // visitor has not asked for reduced motion, so the content is never
-          // hidden by a state nothing will ever reveal.
           dangerouslySetInnerHTML={{
             __html: `try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("anim")}}catch(e){}`,
           }}
@@ -45,14 +72,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               "name": "Dream Dental",
-              "applicationCategory": "BusinessApplication",
+              "applicationCategory": "HealthCareApplication",
               "operatingSystem": "Web",
-              "description": "All-in-one dental clinic management — clinical, business and financial in one system.",
-            })
+              "description":
+                "All-in-one dental clinic management software bringing patient profiles, appointments, dental charting, imaging, and finances into one workspace.",
+            }),
           }}
         />
       </head>
-      <body suppressHydrationWarning>
+      <body
+        className="min-h-screen bg-[#F6F4EF] text-[#18252B] font-sans selection:bg-[#2F6F6A] selection:text-white"
+        suppressHydrationWarning
+      >
         {children}
         <Analytics />
         <SpeedInsights />
