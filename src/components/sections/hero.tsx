@@ -7,7 +7,7 @@ export function Hero() {
     <section
       id="top"
       data-hero=""
-      className="relative pt-12 sm:pt-16 lg:pt-20 pb-24 sm:pb-32 lg:pb-40 px-4 sm:px-6 lg:px-8"
+      className="relative pt-6 sm:pt-8 lg:pt-10 pb-24 sm:pb-32 lg:pb-40 px-4 sm:px-6 lg:px-8"
     >
       {/* 
         Editorial Header

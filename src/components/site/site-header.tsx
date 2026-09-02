@@ -28,6 +28,8 @@ export function SiteHeader({ menuOpen, onToggleMenu, onRequestDemo }: SiteHeader
         }}
       />
 
+
+
       <header
         data-header=""
         className="sticky top-0 z-40 flex items-center justify-between h-[72px] px-4 sm:px-8 lg:px-12 bg-[#F6F4EF]/85 backdrop-blur-md border-b border-[#18252B]/8 transition-all duration-300"
@@ -120,6 +122,18 @@ export function SiteHeader({ menuOpen, onToggleMenu, onRequestDemo }: SiteHeader
           </button>
         </div>
       </header>
+
+      {/* Bismillah: Centered under the navbar */}
+      <div className="w-full flex items-center justify-center pt-8 sm:pt-10 pb-2 px-4 select-none">
+        <Image
+          src="/bismillah.png"
+          alt="Bismillah"
+          width={2198}
+          height={677}
+          priority
+          className="h-[28px] sm:h-[36px] md:h-[42px] w-auto max-w-full object-contain opacity-85 hover:opacity-100 transition-opacity"
+        />
+      </div>
     </>
   );
 }
