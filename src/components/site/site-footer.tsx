@@ -3,6 +3,7 @@ import Link from "next/link";
 
 const productLinks = [
   { href: "/#workflow", label: "Patient Workflow" },
+  { href: "/#appointments", label: "Appointments & Scheduling" },
   { href: "/#chairside", label: "Dental Chart" },
   { href: "/#imaging", label: "Clinical Imaging" },
   { href: "/#operations", label: "Lab Orders & Operations" },

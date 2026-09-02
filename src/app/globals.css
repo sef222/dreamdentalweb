@@ -166,8 +166,8 @@ section[id] {
 /* Screenshot presentation frame class */
 .screenshot-frame {
   border-radius: 18px;
-  border: 1px solid rgba(24, 37, 43, 0.10);
-  box-shadow: 0 24px 60px rgba(24, 37, 43, 0.08), 0 4px 16px rgba(24, 37, 43, 0.04);
+  border: 1px solid rgba(24, 37, 43, 0.12);
+  box-shadow: 0 24px 60px rgba(24, 37, 43, 0.10), 0 4px 16px rgba(24, 37, 43, 0.03);
   background: #ffffff;
   overflow: hidden;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -175,8 +175,8 @@ section[id] {
 
 .screenshot-frame-dark {
   border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 28px 70px rgba(10, 24, 22, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 32px 80px rgba(10, 24, 22, 0.5);
   background: #18252B;
   overflow: hidden;
 }

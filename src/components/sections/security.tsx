@@ -1,54 +1,58 @@
-﻿export function Security() {
-  const securityPoints = [
+export function Security() {
+  const securityPillars = [
     {
+      label: "PATIENT RECORDS",
       title: "Patient Records Governance",
       description:
-        "Medical histories, charting logs, and radiographic scans are stored in structured, tamper-evident records compliant with healthcare privacy regulations.",
+        "Medical histories, anatomical tooth charts, and radiographic scans are stored in structured, protected clinical schemas designed for medical data consistency.",
     },
     {
-      title: "Granular Access Management",
+      label: "ACCESS MANAGEMENT",
+      title: "Role-Based Access Controls",
       description:
-        "Define exact permission tiers for primary dentists, associates, dental assistants, receptionists, and accountants to safeguard sensitive clinic finances.",
+        "Define exact permission tiers for primary dentists, associate practitioners, dental assistants, receptionists, and accountants to safeguard sensitive clinic records.",
     },
     {
-      title: "Immutable Activity Tracking",
+      label: "ACTIVITY TRACKING",
+      title: "Immutable Audit Logs",
       description:
-        "Every change to a dental chart, appointment status, or payment record generates an auditable timestamped event log.",
+        "Every addition to a dental chart, alteration to an appointment status, or payment collected logs an immutable, timestamped user record.",
     },
     {
-      title: "Structured Clinic Backups",
+      label: "STRUCTURED DATA",
+      title: "Resilient Structured Backups",
       description:
-        "Automated continuous cloud backups and cryptographic data isolation protect your clinic against local hardware failures or data corruption.",
+        "Automated continuous database backups and encrypted cloud persistence protect your clinic against local computer failures and data loss.",
     },
   ];
 
   return (
     <section
       id="security"
-      className="relative py-24 sm:py-32 lg:py-40 px-4 sm:px-8 lg:px-12 max-w-6xl mx-auto border-t border-[#18252B]/8"
+      className="relative py-28 sm:py-36 lg:py-44 px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto border-t border-[#18252B]/10"
     >
-      <div className="max-w-3xl mb-16 sm:mb-20">
+      <div className="max-w-3xl mb-16 sm:mb-24">
         <span
           data-r=""
-          className="text-xs font-semibold tracking-widest text-[#5F696B] uppercase block mb-3 font-mono"
+          className="text-xs font-mono font-semibold tracking-[0.2em] text-[#5F696B] uppercase block mb-4"
         >
-          DATA INTEGRITY & COMPLIANCE
+          DATA INTEGRITY & SECURITY
         </span>
         <h2
           data-r=""
-          className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#18252B] leading-[1.12] mb-6"
+          className="text-4xl sm:text-6xl lg:text-7xl font-normal font-serif tracking-tight text-[#18252B] leading-[1.08] mb-6 text-balance"
         >
           Your clinic&apos;s information,
           <br />
-          <span className="font-serif italic font-normal text-[#2F6F6A]">
+          <span className="italic text-[#2F6F6A]">
             organised and protected.
           </span>
         </h2>
         <p
           data-r=""
-          className="text-lg sm:text-xl text-[#5F696B] leading-relaxed"
+          className="text-lg sm:text-xl text-[#5F696B] leading-relaxed max-w-2xl text-balance"
         >
-          Healthcare technology demands absolute reliability. Dream Dental is built with patient data confidentiality, structured schema design, and enterprise-grade resilience.
+          A medical clinic demands absolute dependability. Dream Dental keeps clinical charts, diagnostics, and financial records disciplined, secure, and auditable.
         </p>
       </div>
 
@@ -56,20 +60,27 @@
         data-r=""
         className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
       >
-        {securityPoints.map((point, index) => (
+        {securityPillars.map((pillar, index) => (
           <div
             key={index}
-            className="p-6 sm:p-8 rounded-2xl bg-white border border-[#18252B]/8 shadow-sm"
+            className="p-8 sm:p-10 rounded-2xl bg-white border border-[#18252B]/12 shadow-[0_24px_60px_rgba(24,37,43,0.04)] flex flex-col justify-between"
           >
-            <span className="text-xs font-mono font-semibold text-[#2F6F6A] block mb-3">
-              0{index + 1}
-            </span>
-            <h3 className="text-xl font-semibold text-[#18252B] mb-3">
-              {point.title}
-            </h3>
-            <p className="text-sm text-[#5F696B] leading-relaxed">
-              {point.description}
-            </p>
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[11px] font-mono font-bold tracking-widest text-[#2F6F6A] uppercase">
+                  {pillar.label}
+                </span>
+                <span className="text-xs font-mono text-[#899193]">
+                  0{index + 1}
+                </span>
+              </div>
+              <h3 className="text-xl font-semibold text-[#18252B] mb-3">
+                {pillar.title}
+              </h3>
+              <p className="text-sm text-[#5F696B] leading-relaxed">
+                {pillar.description}
+              </p>
+            </div>
           </div>
         ))}
       </div>
