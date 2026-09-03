@@ -40,11 +40,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico?v=2" },
-      { url: "/favicon.png?v=2", type: "image/png" },
+      { url: "/favicon.ico?v=3" },
+      { url: "/favicon.svg?v=3", type: "image/svg+xml" },
+      { url: "/favicon.png?v=3", type: "image/png" },
     ],
     apple: [
-      { url: "/apple-icon.png?v=2" },
+      { url: "/apple-icon.png?v=3" },
     ],
   },
 };
@@ -57,9 +58,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
-        <link rel="icon" href="/favicon.png?v=2" type="image/png" />
-        <link rel="apple-touch-icon" href="/apple-icon.png?v=2" />
+        <link rel="icon" href="/favicon.ico?v=3" sizes="any" />
+        <link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.png?v=3" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-icon.png?v=3" />
         <script
           dangerouslySetInnerHTML={{
             __html: `try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("anim")}}catch(e){}`,
